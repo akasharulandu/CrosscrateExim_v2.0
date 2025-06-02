@@ -1,0 +1,17 @@
+.our-values-section {
+  /* background-color: #0c2b2b; Teal background */
+  background: linear-gradient(rgba(32, 33, 33, 0.9), rgba(7, 47, 42, 0.9)),
+                url('E:\Developping\Own Project developing\CrosscrateExim\frontend\public\images\bg-about.jpeg') center/cover no-repeat;
+  color: white;
+  border-radius: 10px;
+}
+
+.our-values-section .subheading {
+  color: #fca311; /* Orange color */
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.our-values-section strong {
+  color: #fca311; /* Highlighted orange */
+}

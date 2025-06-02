@@ -1,0 +1,21 @@
+.mission-vision-box {
+    /* background-color: #072f2a; Deep green background */
+    background: linear-gradient(rgba(32, 33, 33, 0.9), rgba(7, 47, 42, 0.9)),
+                url('E:\Developping\Own Project developing\CrosscrateExim\frontend\public\images\bg-about.jpeg') center/cover no-repeat;
+    border-radius: 20px;
+    color: white;
+  }
+  
+  .mission-vision-box strong {
+    color: #fca311; /* Highlighted orange */
+  }
+  
+  .mission-vision-box ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .mission-vision-box li {
+    margin-bottom: 0.5rem;
+  }
+  

@@ -1,0 +1,263 @@
+/* Container */
+.product-table-container {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+/* Light Mode Variables */
+.light-mode {
+  --bg-color: #fff;
+  --text-color: #222;
+  --table-header-bg: #fafafa;
+  --table-row-hover: #f5f5f5;
+  --button-primary-bg: #1890ff;
+  --button-primary-color: #fff;
+  --modal-bg: #fff;
+  --input-bg: #fff;
+  --input-border: #d9d9d9;
+}
+
+/* Dark Mode Variables */
+.dark-mode {
+  --bg-color: #1f1f1f;
+  --text-color: #eee;
+  --table-header-bg: #141414;
+  --table-row-hover: #262626;
+  --button-primary-bg: #177ddc;
+  --button-primary-color: #fff;
+  --modal-bg: #252525;
+  --input-bg: #333;
+  --input-border: #444;
+}
+
+/* Apply background and text colors */
+.product-table-container.light-mode {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.product-table-container.dark-mode {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Table Styling */
+.light-table .ant-table-thead > tr > th {
+  background: var(--table-header-bg);
+  color: var(--text-color);
+}
+
+.dark-table .ant-table-thead > tr > th {
+  background: var(--table-header-bg);
+  color: var(--text-color);
+}
+
+.light-table .ant-table-tbody > tr:hover > td {
+  background: var(--table-row-hover);
+}
+
+.dark-table .ant-table-tbody > tr:hover > td {
+  background: var(--table-row-hover);
+}
+
+/* Buttons */
+.ant-btn-primary {
+  background-color: var(--button-primary-bg);
+  border-color: var(--button-primary-bg);
+  color: var(--button-primary-color);
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+  background-color: #0050b3;
+  border-color: #0050b3;
+  color: var(--button-primary-color);
+}
+
+/* Modal */
+.ant-modal-content {
+  background-color: var(--modal-bg);
+  color: var(--text-color);
+  border-radius: 8px;
+}
+
+/* Modal header */
+.ant-modal-title {
+  color: var(--text-color);
+}
+
+/* Inputs inside Modal */
+.ant-input, .ant-input-number, .ant-input:hover, .ant-input:focus,
+.ant-input-number:hover, .ant-input-number:focus {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-color);
+}
+
+.ant-input::placeholder {
+  color: #888;
+}
+
+/* File input (native) */
+.form-control.mb-2 {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: var(--text-color);
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+}
+
+/* Dimension Table in Modal */
+.ant-table-wrapper {
+  background-color: var(--modal-bg);
+  color: var(--text-color);
+}
+
+/* Dimension table inputs */
+.ant-table-cell input {
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text-color);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Image in main table */
+.ant-table-cell img {
+  border-radius: 6px;
+  object-fit: cover;
+  width: 80px;
+  height: 80px;
+}
+
+/* Action buttons spacing */
+.ant-table-cell button {
+  margin-right: 8px;
+}
+
+/* Theme toggle icon */
+.theme-toggle .anticon {
+  color: var(--text-color);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .product-table-container {
+    padding: 10px;
+  }
+
+  .ant-table-wrapper {
+    font-size: 14px;
+  }
+}
+
+/* Stylish Spec Table */
+.spec-table {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.spec-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.spec-label, .spec-value {
+  flex: 1;
+}
+.spec-label {
+  min-width: 180px;
+}
+.spec-value {
+  min-width: 120px;
+}
+.spec-row .ant-btn {
+  margin-left: 4px;
+  margin-top: 0;
+}
+
+.spec-container {
+  transition: all 0.3s ease;
+}
+
+.spec-row {
+  transition: all 0.3s ease;
+}
+
+.spec-row:hover {
+  transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.spec-number {
+  transition: all 0.3s ease;
+}
+
+.spec-row:hover .spec-number {
+  transform: scale(1.1);
+}
+
+.ant-input {
+  transition: all 0.3s ease;
+}
+
+.ant-input:focus {
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.spec-row .ant-btn {
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.spec-row:hover .ant-btn {
+  opacity: 1;
+}
+
+/* Dark mode specific styles */
+.dark-mode .spec-container {
+  background: rgba(0,0,0,0.2);
+}
+
+.dark-mode .spec-row {
+  background: rgba(0,0,0,0.2);
+}
+
+.dark-mode .ant-input {
+  background: rgba(0,0,0,0.2);
+  border-color: #444;
+  color: #fff;
+}
+
+.dark-mode .ant-input::placeholder {
+  color: #888;
+}
+
+/* Animation for adding new specs */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.spec-row {
+  animation: slideDown 0.3s ease;
+}

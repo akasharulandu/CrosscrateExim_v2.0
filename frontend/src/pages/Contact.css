@@ -1,0 +1,68 @@
+.contact-section {
+  background: linear-gradient(rgba(32, 33, 33, 0.9), rgba(7, 47, 42, 0.9)),
+              url('../assets/bg-about.jpeg') center/cover no-repeat;
+  border-radius: 20px;
+  color: white;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* .contact-section h2, */
+.contact-section h4 {
+  color: #fca311;
+}
+
+.contact-section p {
+  font-size: 1rem;
+}
+
+.contact-section strong {
+  color: #fca311;
+}
+
+.contact-section form {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+.contact-section input.form-control,
+.contact-section textarea.form-control {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #e4e2e2;
+  padding: 10px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-section .form-control:focus {
+  border-color: #fca311;
+  box-shadow: 0 0 0 0.2rem rgba(252, 163, 17, 0.25);
+}
+
+.contact-section .btn-primary {
+  background-color: #fca311;
+  border: none;
+  font-weight: bold;
+}
+
+.contact-section .btn-primary:hover {
+  background-color: #e0950f;
+}
+
+.map-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.map-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
