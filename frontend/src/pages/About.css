@@ -1,11 +1,139 @@
-.about-section {
-    background: linear-gradient(rgba(32, 33, 33, 0.9), rgba(7, 47, 42, 0.9)),
-                url('E:\Developping\Own Project developing\CrosscrateExim\frontend\public\images\bg-about.jpeg') center/cover no-repeat;
+.aboutx-section-wrapper {
+    padding: 0.1rem 0;
+    background: linear-gradient(135deg, rgba(11, 146, 128, 0.95), rgba(25, 118, 210, 0.9));
     border-radius: 20px;
+    margin: 5px;
+}
+  
+  .aboutx-section {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
     color: white;
-}
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 
-.about-section strong {
-    color: #fca311; /* Optional: use if highlighting certain text */
-}
+  }
+  
+  .aboutx-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(11, 146, 128, 0.95), rgba(25, 118, 210, 0.9)),
+                url("../assets/bg-about.jpeg") center/cover no-repeat;
+    z-index: -1;
+    border-radius: 20px;
+  }
+  
+  .aboutx-content-wrapper {
+    padding: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .aboutx-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+   
+  }
+  
+  .aboutx-header-line {
+    height: 2px;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, #fca311, transparent);
+    margin: 0 1rem;
+  }
+  
+  .aboutx-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 0;
+     padding: 0.5rem 1rem; 
+   
+    position: relative;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+   
+  }
+  
+  .aboutx-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #fca311;
+    border-radius: 2px;
+  }
+  
+  .aboutx-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .aboutx-card {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .aboutx-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .aboutx-card-icon {
+    font-size: 2.5rem;
+    color: #fca311;
+    margin-right: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+  }
+  
+  .aboutx-card-text {
+    flex: 1;
+  }
+  
+  .aboutx-card-text p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  @media (max-width: 768px) {
+    .aboutx-content-wrapper {
+      padding: 2rem 1.5rem;
+    }
+    
+    .aboutx-title {
+      font-size: 2rem;
 
+   
+    }
+    
+    .aboutx-card {
+      flex-direction: column;
+    }
+    
+    .aboutx-card-icon {
+      margin-right: 0;
+      
+    }
+  }

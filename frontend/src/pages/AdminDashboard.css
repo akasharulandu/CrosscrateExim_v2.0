@@ -1,0 +1,194 @@
+/* Admin Dashboard Styles */
+.crosscrate-adash-root {
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+.crosscrate-adash-root.light {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  color: #212529;
+}
+
+.crosscrate-adash-root.dark {
+  background: linear-gradient(135deg, #1a202c, #2d3748);
+  color: #f7fafc;
+}
+
+.crosscrate-adash-container {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Welcome Alert */
+.crosscrate-adash-welcome-alert {
+  background: linear-gradient(135deg, #4ade80, #3b82f6);
+  color: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+  text-align: center;
+}
+
+.crosscrate-adash-welcome-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.crosscrate-adash-welcome-content p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Dashboard Header */
+.crosscrate-adash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.crosscrate-adash-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, #4ade80, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.crosscrate-adash-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.crosscrate-adash-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.crosscrate-adash-home-btn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.crosscrate-adash-home-btn:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+}
+
+.crosscrate-adash-logout-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.crosscrate-adash-logout-btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Dashboard Content */
+.crosscrate-adash-content {
+  margin-top: 20px;
+}
+
+.crosscrate-adash-grid-single {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+/* Dashboard Cards */
+.crosscrate-adash-card {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.crosscrate-adash-root.light .crosscrate-adash-card {
+  background-color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.crosscrate-adash-root.dark .crosscrate-adash-card {
+  background-color: #2d3748;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.crosscrate-adash-card-header {
+  padding: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.crosscrate-adash-root.dark .crosscrate-adash-card-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.crosscrate-adash-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.crosscrate-adash-card-icon {
+  color: #3b82f6;
+}
+
+.crosscrate-adash-card-description {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.crosscrate-adash-root.dark .crosscrate-adash-card-description {
+  color: #9ca3af;
+}
+
+/* Product Card */
+.crosscrate-adash-product-card {
+  overflow: visible;
+}
+
+.crosscrate-adash-product-table-wrapper {
+  padding: 24px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .crosscrate-adash-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .crosscrate-adash-actions {
+    width: 100%;
+  }
+
+  .crosscrate-adash-action-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}

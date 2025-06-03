@@ -1,4 +1,225 @@
-input::placeholder {
-    font-size: 14px;
+.loginx-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #36bfb9, #98debd);
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
+.loginx-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.loginx-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  animation: float 15s infinite ease-in-out;
+}
+
+.loginx-shape:nth-child(1) {
+  width: 500px;
+  height: 500px;
+  top: -250px;
+  right: -100px;
+  animation-delay: 0s;
+}
+
+.loginx-shape:nth-child(2) {
+  width: 400px;
+  height: 400px;
+  bottom: -200px;
+  left: -100px;
+  animation-delay: 5s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+.loginx-form-container {
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.loginx-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #36bfb9, #98debd);
+}
+
+.loginx-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.loginx-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.loginx-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+.loginx-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loginx-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.loginx-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.loginx-form-control {
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f8f8f8;
+}
+
+.loginx-form-control:focus {
+  border-color: #36bfb9;
+  box-shadow: 0 0 0 3px rgba(54, 191, 185, 0.2);
+  outline: none;
+}
+
+.loginx-form-control::placeholder {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.loginx-form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.loginx-button {
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #36bfb9, #98debd);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.loginx-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(54, 191, 185, 0.4);
+}
+
+.loginx-button:active {
+  transform: translateY(0);
+}
+
+.loginx-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loginx-back-link {
+  text-align: center;
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.loginx-back-link:hover {
+  color: #36bfb9;
+}
+
+/* Loading spinner */
+.loginx-spinner {
+  width: 70px;
+  text-align: center;
+}
+
+.loginx-spinner > div {
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 100%;
+  display: inline-block;
+  animation: bounce 1.4s infinite ease-in-out both;
+  margin: 0 2px;
+}
+
+.loginx-spinner .bounce1 {
+  animation-delay: -0.32s;
+}
+
+.loginx-spinner .bounce2 {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { 
+    transform: scale(0);
+  } 40% { 
+    transform: scale(1.0);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+  .loginx-form-container {
+    padding: 30px 20px;
+    max-width: 90%;
   }
   
+  .loginx-header h2 {
+    font-size: 24px;
+  }
+}

@@ -1,17 +1,124 @@
 .our-values-section {
-  /* background-color: #0c2b2b; Teal background */
-  background: linear-gradient(rgba(32, 33, 33, 0.9), rgba(7, 47, 42, 0.9)),
-                url('E:\Developping\Own Project developing\CrosscrateExim\frontend\public\images\bg-about.jpeg') center/cover no-repeat;
+  position: relative;
+  padding: 5rem 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(7, 47, 42, 0.95), rgba(32, 33, 33, 0.9));
+  
+}
+
+.our-values-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(7, 47, 42, 0.95), rgba(32, 33, 33, 0.9)),
+              url("../assets/bg-about.jpeg") center/cover no-repeat;
+  z-index: -1;
+}
+
+.values-header {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.values-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
   color: white;
-  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
 }
 
-.our-values-section .subheading {
-  color: #fca311; /* Orange color */
+.values-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: #fca311;
+  border-radius: 2px;
+}
+
+.values-subtitle {
   font-size: 1.2rem;
-  font-weight: 600;
+  color: #fca311;
+  max-width: 700px;
+  margin: 1.5rem auto 0;
+  font-weight: 500;
 }
 
-.our-values-section strong {
-  color: #fca311; /* Highlighted orange */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.value-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.value-icon {
+  font-size: 2.5rem;
+  color: #fca311;
+  margin-bottom: 1.5rem;
+  background-color: rgba(252, 163, 17, 0.1);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(252, 163, 17, 0.2);
+}
+
+.value-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fca311;
+}
+
+.value-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+  .values-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .value-card {
+    padding: 1.5rem;
+  }
+  
+  .value-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .value-title {
+    font-size: 1.3rem;
+  }
 }

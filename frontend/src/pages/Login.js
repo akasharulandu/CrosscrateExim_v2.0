@@ -3,11 +3,13 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import "./Login.css"; // Optional: for custom CSS if needed
+import { motion } from "framer-motion";
+import "./Login.css";
 
 function Login({ setIsAdmin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,54 +18,88 @@ function Login({ setIsAdmin }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const res = await axios.post("http://localhost:5000/api/login", { username, password });
       localStorage.setItem("token", res.data.token);
       setIsAdmin(true);
       navigate("/dashboard");
-    } catch {
+    } catch (error) {
       alert("Invalid credentials");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center vh-100"
-      style={{
-        background: "linear-gradient(to right, rgb(54 191 185), rgb(152 222 191))",
-      }}
-    >
-      <div
-        className="p-4 border rounded shadow"
-        style={{
-          minWidth: "320px",
-          maxWidth: "400px",
-          background: "#fff",
-        }}
+    <div className="loginx-container">
+      <div className="loginx-background">
+        <div className="loginx-shape"></div>
+        <div className="loginx-shape"></div>
+      </div>
+      
+      <motion.div 
+        className="loginx-form-container"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
         data-aos="fade-up"
       >
-        <h2 className="mb-4 text-center">Admin Login</h2>
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            className="form-control mb-3"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            className="form-control mb-3"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div className="d-flex justify-content-between align-items-center">
-            <button type="submit" className="btn btn-primary">Login</button>
-            <Link to="/" className="btn btn-link">Back to Homepage</Link>
+        <div className="loginx-header">
+          <h2>Admin Login</h2>
+          <p>Enter your credentials to access the dashboard</p>
+        </div>
+        
+        <form onSubmit={handleLogin} className="loginx-form">
+          <div className="loginx-form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              className="loginx-form-control"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          
+          <div className="loginx-form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              className="loginx-form-control"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          
+          <div className="loginx-form-actions">
+            <button 
+              type="submit" 
+              className="loginx-button"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <div className="loginx-spinner">
+                  <div className="bounce1"></div>
+                  <div className="bounce2"></div>
+                  <div className="bounce3"></div>
+                </div>
+              ) : (
+                "Login"
+              )}
+            </button>
+            
+            <Link to="/" className="loginx-back-link">
+              Back to Homepage
+            </Link>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }
