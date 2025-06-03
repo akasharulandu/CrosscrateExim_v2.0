@@ -1,7 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Button, Modal, Carousel } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+
+"use client"
+
+import { useEffect, useState, useRef } from "react"
+import { Button, Modal, Carousel } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
+import { motion } from "framer-motion"
 import {
   FaWhatsapp,
   FaEnvelope,
@@ -12,78 +15,106 @@ import {
   FaGlobe,
   FaLeaf,
   FaShieldAlt,
-} from "react-icons/fa";
-import { HiSparkles } from "react-icons/hi";
-import "./Home.css";
-import axios from "axios";
-import About from "../pages/About";
-import MissionVision from "../pages/MissionVision";
-import OurValues from "../pages/OurValues";
-import Contact from "../pages/Contact";
-import languageText from "../utils/languageText";
-import Navbar from "../components/Navbar";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+} from "react-icons/fa"
+import { HiSparkles } from "react-icons/hi"
+import "./Home.css"
+import axios from "axios"
+import About from "../pages/About"
+import MissionVision from "../pages/MissionVision"
+import OurValues from "../pages/OurValues"
+import Contact from "../pages/Contact"
+import languageText from "../utils/languageText"
+import Navbar from "../components/Navbar"
+import jsPDF from "jspdf"
+import autoTable from "jspdf-autotable"
 
 function Home({ isAdmin }) {
-  const [products, setProducts] = useState([]);
-  const [theme, setTheme] = useState("light");
-  const [language, setLanguage] = useState("en");
-  const [heroImage, setHeroImage] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const [showLogoutAlert, setShowLogoutAlert] = useState(false);
+  const [products, setProducts] = useState([])
+  const [theme, setTheme] = useState("light")
+  const [language, setLanguage] = useState("en")
+  const [heroImage, setHeroImage] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [currentIndex, setCurrentIndex] = useState(null)
+  const [showLogoutAlert, setShowLogoutAlert] = useState(false)
 
-  const productDetailsRef = useRef(null);
-  const navigate = useNavigate();
+  const productDetailsRef = useRef(null)
+  const navigate = useNavigate()
+
+  // Helper function to safely get text from multilingual objects
+  const getLocalizedText = (textObj, fallback = "") => {
+    if (!textObj) return fallback
+    if (typeof textObj === "string") return textObj
+    if (typeof textObj === "object") {
+      return textObj[language] || textObj.en || textObj[Object.keys(textObj)[0]] || fallback
+    }
+    return fallback
+  }
+
+  // Helper function to safely get product name
+  const getProductName = (product) => {
+    return getLocalizedText(product?.name, "Unnamed Product")
+  }
+
+  // Helper function to safely get product description
+  const getProductDescription = (product) => {
+    return getLocalizedText(product?.description, "No description available")
+  }
+
+  // Helper function to safely get spec values
+  const getSpecText = (spec, field) => {
+    if (!spec || !spec[field]) return ""
+    return getLocalizedText(spec[field], "")
+  }
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts()
     axios
       .get("/api/hero")
       .then((res) => setHeroImage(res.data?.imageUrl || null))
-      .catch((err) => console.error("Failed to fetch hero image:", err));
-  }, []);
+      .catch((err) => console.error("Failed to fetch hero image:", err))
+  }, [])
 
   const fetchProducts = () => {
     axios
       .get("/api/products")
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.error("Error fetching products:", err));
-  };
+      .then((res) => {
+        console.log("Fetched products:", res.data)
+        setProducts(res.data)
+      })
+      .catch((err) => console.error("Error fetching products:", err))
+  }
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    document.body.className =
-      newTheme === "light" ? "bg-light text-dark" : "bg-dark text-white";
-  };
+    const newTheme = theme === "light" ? "dark" : "light"
+    setTheme(newTheme)
+    document.body.className = newTheme === "light" ? "bg-light text-dark" : "bg-dark text-white"
+  }
 
   const openModal = (product) => {
-    const index = products.findIndex((p) => p._id === product._id);
-    setSelectedProduct(product);
-    setCurrentIndex(index);
-    setShowModal(true);
-  };
+    const index = products.findIndex((p) => p._id === product._id)
+    setSelectedProduct(product)
+    setCurrentIndex(index)
+    setShowModal(true)
+  }
 
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => setShowModal(false)
 
   const handleNext = () => {
     if (currentIndex < products.length - 1) {
-      const nextIndex = currentIndex + 1;
-      setSelectedProduct(products[nextIndex]);
-      setCurrentIndex(nextIndex);
+      const nextIndex = currentIndex + 1
+      setSelectedProduct(products[nextIndex])
+      setCurrentIndex(nextIndex)
     }
-  };
+  }
 
   const handlePrevious = () => {
     if (currentIndex > 0) {
-      const prevIndex = currentIndex - 1;
-      setSelectedProduct(products[prevIndex]);
-      setCurrentIndex(prevIndex);
+      const prevIndex = currentIndex - 1
+      setSelectedProduct(products[prevIndex])
+      setCurrentIndex(prevIndex)
     }
-  };
+  }
 
   const handleDownloadPDF = async () => {
     if (!selectedProduct) return;
@@ -185,28 +216,26 @@ function Home({ isAdmin }) {
   };
 
   // Get translations
-  const navbarText = languageText[language]?.navbar || {};
-  const productText = languageText[language]?.products || {};
-  const adminText = languageText[language]?.admin || {};
-  const actionsText = languageText[language]?.actions || {};
+  const navbarText = languageText[language]?.navbar || {}
+  const productText = languageText[language]?.products || {}
+  const adminText = languageText[language]?.admin || {}
+  const actionsText = languageText[language]?.actions || {}
 
-  const themeClass = theme === "dark" ? "dark-theme" : "light-theme";
+  const themeClass = theme === "dark" ? "dark-theme" : "light-theme"
 
   const scrollToSection = (id) => {
-    const el = document.getElementById(id);
+    const el = document.getElementById(id)
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      el.scrollIntoView({ behavior: "smooth" })
     }
-  };
+  }
 
   return (
     <div
       className={`crosscrate-home-container ${theme} ${themeClass}`}
       style={{
         background:
-          theme === "light"
-            ? "linear-gradient(135deg, #e3f9f7, #fddaed)"
-            : "linear-gradient(135deg, #202423, #191c1b)",
+          theme === "light" ? "linear-gradient(135deg, #e3f9f7, #fddaed)" : "linear-gradient(135deg, #202423, #191c1b)",
         minHeight: "100vh",
         transition: "background 0.5s ease",
       }}
@@ -235,7 +264,7 @@ function Home({ isAdmin }) {
       {/* Hero Section */}
       <section className="crosscrate-home-hero-section">
         <div className="crosscrate-home-hero-overlay"></div>
-        
+
         {/* Animated Background Elements */}
         <div className="crosscrate-home-particles-container">
           {[...Array(20)].map((_, i) => (
@@ -249,7 +278,7 @@ function Home({ isAdmin }) {
               }}
               transition={{
                 duration: 3 + Math.random() * 2,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 delay: Math.random() * 2,
               }}
               style={{
@@ -293,17 +322,11 @@ function Home({ isAdmin }) {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="crosscrate-home-hero-buttons"
           >
-            <button
-              className="crosscrate-home-primary-button"
-              onClick={() => scrollToSection("products")}
-            >
+            <button className="crosscrate-home-primary-button" onClick={() => scrollToSection("products")}>
               Explore Products
               <FaArrowRight className="crosscrate-home-button-icon" />
             </button>
-            <button
-              className="crosscrate-home-secondary-button"
-              onClick={() => scrollToSection("about")}
-            >
+            <button className="crosscrate-home-secondary-button" onClick={() => scrollToSection("about")}>
               About Us
             </button>
           </motion.div>
@@ -333,7 +356,7 @@ function Home({ isAdmin }) {
         {/* Scroll Indicator */}
         <motion.div
           animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
           className="crosscrate-home-scroll-indicator"
         >
           <div className="crosscrate-home-scroll-mouse">
@@ -372,16 +395,21 @@ function Home({ isAdmin }) {
                 className="crosscrate-home-product-card-wrapper"
                 onClick={() => openModal(product)}
               >
-                <div className={`crosscrate-home-enhanced-product-card ${theme === "dark" ? "crosscrate-home-dark" : ""}`}>
+                <div
+                  className={`crosscrate-home-enhanced-product-card ${theme === "dark" ? "crosscrate-home-dark" : ""}`}
+                >
                   {/* Product Image */}
                   <div className="crosscrate-home-product-image-container">
                     <img
-                      src={product.images?.[0] || product.imageUrl}
-                      alt={product.name}
+                      src={product.images?.[0] || product.imageUrl || "/placeholder.svg"}
+                      alt={getProductName(product)}
                       className="crosscrate-home-product-image"
+                      onError={(e) => {
+                        e.target.src = "/placeholder.svg"
+                      }}
                     />
                     <div className="crosscrate-home-image-overlay"></div>
-                    <div className="crosscrate-home-product-price-tag">₹{product.price}</div>
+                    <div className="crosscrate-home-product-price-tag">₹{product.price || "N/A"}</div>
                     <div className="crosscrate-home-view-details-overlay">
                       <button className="crosscrate-home-view-details-button">
                         <FaEye className="crosscrate-home-view-icon" />
@@ -393,27 +421,35 @@ function Home({ isAdmin }) {
                   {/* Product Info */}
                   <div className="crosscrate-home-product-info">
                     <h3 className={`crosscrate-home-product-title ${theme === "dark" ? "text-white" : ""}`}>
-                      {product.name}
+                      {getProductName(product)}
                     </h3>
-                    <p className={`crosscrate-home-product-description ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                      {product.description}
+                    <p
+                      className={`crosscrate-home-product-description ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+                    >
+                      {getProductDescription(product).length > 100
+                        ? getProductDescription(product).substring(0, 100) + "..."
+                        : getProductDescription(product)}
                     </p>
 
                     {/* Tags */}
-                    <div className="crosscrate-home-product-tags">
-                      {product.tags?.map((tag, idx) => (
-                        <span key={idx} className="crosscrate-home-product-tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    {product.tags && product.tags.length > 0 && (
+                      <div className="crosscrate-home-product-tags">
+                        {product.tags.map((tag, idx) => (
+                          <span key={idx} className="crosscrate-home-product-tag">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
 
                     {/* Rating */}
                     <div className="crosscrate-home-product-rating">
                       {[...Array(5)].map((_, i) => (
                         <FaStar key={i} className="crosscrate-home-star-icon" />
                       ))}
-                      <span className={`crosscrate-home-rating-count ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>
+                      <span
+                        className={`crosscrate-home-rating-count ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}
+                      >
                         (4.8)
                       </span>
                     </div>
@@ -422,6 +458,15 @@ function Home({ isAdmin }) {
               </motion.div>
             ))}
           </div>
+
+          {/* Show message if no products */}
+          {products.length === 0 && (
+            <div className="text-center py-5">
+              <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                No products available at the moment.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -455,13 +500,8 @@ function Home({ isAdmin }) {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <Modal.Header
-            closeButton
-            className="crosscrate-home-enhanced-modal-header"
-          >
-            <Modal.Title className="w-100 text-center fw-bold">
-              {selectedProduct?.name || productText.productDetails || "Product Details"}
-            </Modal.Title>
+          <Modal.Header closeButton className="crosscrate-home-enhanced-modal-header">
+            <Modal.Title className="w-100 text-center fw-bold">{getProductName(selectedProduct)}</Modal.Title>
           </Modal.Header>
 
           <Modal.Body className="crosscrate-home-enhanced-modal-body">
@@ -475,6 +515,9 @@ function Home({ isAdmin }) {
                           src={imgUrl || "/placeholder.svg"}
                           alt={`Slide ${idx}`}
                           className="crosscrate-home-carousel-image"
+                          onError={(e) => {
+                            e.target.src = "/placeholder.svg"
+                          }}
                         />
                       </Carousel.Item>
                     ))}
@@ -483,8 +526,11 @@ function Home({ isAdmin }) {
                   selectedProduct?.imageUrl && (
                     <img
                       src={selectedProduct.imageUrl || "/placeholder.svg"}
-                      alt={selectedProduct.name}
+                      alt={getProductName(selectedProduct)}
                       className="crosscrate-home-single-product-image"
+                      onError={(e) => {
+                        e.target.src = "/placeholder.svg"
+                      }}
                     />
                   )
                 )}
@@ -494,11 +540,11 @@ function Home({ isAdmin }) {
                 <div className="crosscrate-home-product-details crosscrate-home-fancy-scrollbar">
                   <div className="crosscrate-home-product-description-section">
                     <h4 className="crosscrate-home-detail-section-title">Description</h4>
-                    <p className="crosscrate-home-detail-text">{selectedProduct?.description}</p>
+                    <p className="crosscrate-home-detail-text">{getProductDescription(selectedProduct)}</p>
                   </div>
 
                   <div className="crosscrate-home-product-price-section">
-                    <span className="crosscrate-home-product-price">₹{selectedProduct?.price}</span>
+                    <span className="crosscrate-home-product-price">₹{selectedProduct?.price || "N/A"}</span>
                   </div>
 
                   {selectedProduct?.specs && selectedProduct.specs.length > 0 && (
@@ -507,20 +553,19 @@ function Home({ isAdmin }) {
                       <div className="crosscrate-home-specs-list">
                         {selectedProduct.specs.map((spec, idx) => (
                           <div key={idx} className="crosscrate-home-spec-item">
-                            <span className="crosscrate-home-spec-label">{spec.label}</span>
-                            <span className="crosscrate-home-spec-value">{spec.value}</span>
+                            <span className="crosscrate-home-spec-label">{getSpecText(spec, "label")}</span>
+                            <span className="crosscrate-home-spec-value">{getSpecText(spec, "value")}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  
                   <div className="crosscrate-home-product-actions pdf-hide">
                     <a
                       href={`https://wa.me/?text=${encodeURIComponent(
-                        `${productText.share || "Check out this product"}: ${selectedProduct?.name}\n${navbarText.welcome || "Welcome to Crosscrate International Exim"}!\n` +
-                        `https://www.crosscrate.com/product/${selectedProduct?._id}`
+                        `${productText.share || "Check out this product"}: ${getProductName(selectedProduct)}\n${navbarText.welcome || "Welcome to Crosscrate International Exim"}!\n` +
+                          `https://www.crosscrate.com/product/${selectedProduct?._id}`,
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -531,7 +576,7 @@ function Home({ isAdmin }) {
                       WhatsApp
                     </a>
                     <a
-                      href={`mailto:?subject=${encodeURIComponent(productText.share || "Check out this product")}: ${selectedProduct?.name}&body=${selectedProduct?.description}`}
+                      href={`mailto:?subject=${encodeURIComponent(productText.share || "Check out this product")}: ${getProductName(selectedProduct)}&body=${getProductDescription(selectedProduct)}`}
                       className="crosscrate-home-action-button crosscrate-home-email-button"
                       title={productText.byEmail || "Share by Email"}
                     >
@@ -540,8 +585,8 @@ function Home({ isAdmin }) {
                     </a>
                     <button
                       onClick={(e) => {
-                        e.preventDefault();
-                        handleDownloadPDF();
+                        e.preventDefault()
+                        handleDownloadPDF()
                       }}
                       className="crosscrate-home-action-button crosscrate-home-pdf-button"
                       title={productText.downloadPdf || "Download PDF"}
@@ -554,7 +599,6 @@ function Home({ isAdmin }) {
               </div>
             </div>
           </Modal.Body>
-
 
           <Modal.Footer className="crosscrate-home-enhanced-modal-footer">
             <Button
@@ -573,18 +617,14 @@ function Home({ isAdmin }) {
             >
               {actionsText.next || "Next"} →
             </Button>
-            <Button 
-              variant="danger" 
-              onClick={handleClose}
-              className="crosscrate-home-close-button"
-            >
+            <Button variant="danger" onClick={handleClose} className="crosscrate-home-close-button">
               {actionsText.close || "Close"}
             </Button>
           </Modal.Footer>
         </motion.div>
       </Modal>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

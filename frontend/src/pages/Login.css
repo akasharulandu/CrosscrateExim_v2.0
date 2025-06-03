@@ -44,7 +44,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) scale(1);
   }
   50% {
@@ -66,7 +67,7 @@
 }
 
 .loginx-form-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -90,6 +91,33 @@
 .loginx-header p {
   color: #666;
   font-size: 16px;
+}
+
+/* Error Message */
+.loginx-error-message {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  border: 1px solid #fca5a5;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 .loginx-form {
@@ -130,6 +158,12 @@
   font-size: 14px;
 }
 
+.loginx-form-control:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 .loginx-form-actions {
   display: flex;
   flex-direction: column;
@@ -153,7 +187,7 @@
   height: 50px;
 }
 
-.loginx-button:hover {
+.loginx-button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(54, 191, 185, 0.4);
 }
@@ -164,6 +198,30 @@
 
 .loginx-button:disabled {
   opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Test Credentials Button (for development) */
+.loginx-test-button {
+  padding: 10px 14px;
+  border: 2px solid #36bfb9;
+  border-radius: 8px;
+  background: transparent;
+  color: #36bfb9;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginx-test-button:hover:not(:disabled) {
+  background: #36bfb9;
+  color: white;
+}
+
+.loginx-test-button:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -205,9 +263,12 @@
 }
 
 @keyframes bounce {
-  0%, 80%, 100% { 
+  0%,
+  80%,
+  100% {
     transform: scale(0);
-  } 40% { 
+  }
+  40% {
     transform: scale(1.0);
   }
 }
@@ -218,8 +279,28 @@
     padding: 30px 20px;
     max-width: 90%;
   }
-  
+
   .loginx-header h2 {
     font-size: 24px;
   }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .loginx-shape {
+    animation: none;
+  }
+
+  .loginx-error-message {
+    animation: none;
+  }
+}
+
+/* Focus styles for better accessibility */
+.loginx-form-control:focus-visible,
+.loginx-button:focus-visible,
+.loginx-test-button:focus-visible,
+.loginx-back-link:focus-visible {
+  outline: 2px solid #36bfb9;
+  outline-offset: 2px;
 }

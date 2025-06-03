@@ -318,7 +318,7 @@
 
 .delete-button:hover {
   background-color: var(--delete-color);
-  color: white;
+  color: rgb(249, 48, 58);
   transform: translateY(-2px);
 }
 

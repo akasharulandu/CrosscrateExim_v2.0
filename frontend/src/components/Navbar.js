@@ -115,15 +115,14 @@ function Navbar({ isAdmin, language, setLanguage, theme, toggleTheme, setShowLog
             style={{
               height: isScrolled ? "40px" : "50px",
               transition: "height 0.3s ease",
-              marginRight: "10px",
+              marginRight: "px",
               boxShadow: "0 0 30px 0 rgba(27, 27, 27, 0.1)",
-              borderRadius: "50%",
-              marginLeft: "0", // ensure no left margin
+              borderRadius: "50%"
             }}
           />
           <div className="brand-text">
             <span className="brand-name" style={{color: theme === "dark" ? "#fff" : "#000"}}>CROSSCRATE</span>
-            <span className="brand-highlight" style={{color: theme === "dark" ? "#fff" : "blue",paddingLeft: "10px"}}>EXIM</span>
+            <span className="brand-highlight" style={{color: theme === "dark" ? "blue" : "blue",paddingLeft: "10px"}}>EXIM</span>
           </div>
         </div>
 
@@ -144,7 +143,7 @@ function Navbar({ isAdmin, language, setLanguage, theme, toggleTheme, setShowLog
         </button>
 
         <div className={`collapse navbar-collapse ${mobileMenuOpen ? 'show' : ''}`} id="navbarNav">
-          <ul className="navbar-nav me-auto mt-2 mt-lg-0 custom-nav">
+          <ul className="navbar-nav me-auto mt-2 mt-lg-0 custom-nav fw-bold">
             {onHomePage ? (
               <>
                 <li className="nav-item">
@@ -200,14 +199,14 @@ function Navbar({ isAdmin, language, setLanguage, theme, toggleTheme, setShowLog
                   backgroundColor: theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
                   color: theme === "dark" ? "#fff" : "#000",
                   border: "none",
-                  padding: "0.25rem 0.6rem",
+                  padding: "0.25rem 0.4rem",
                   borderRadius: "0.18rem",
                   display: "flex",
                   alignItems: "center",
                   gap: "0.4rem",
                   fontSize: "0.78rem",
                   minHeight: "32px",
-                  height: "32px"
+                  height: "35px"
                 }}
               >
                 <FaGlobe style={{ fontSize: "0.95rem" }} />
@@ -300,7 +299,7 @@ function Navbar({ isAdmin, language, setLanguage, theme, toggleTheme, setShowLog
                 backgroundColor: theme === "dark" ? "#ffc107" : "#343a40",
                 color: theme === "dark" ? "#343a40" : "#fff",
                 border: "none",
-                padding: "0.5rem 1rem",
+                padding: "0.38rem 0.7rem",
                 borderRadius: "0.25rem",
                 display: "flex",
                 alignItems: "center",
@@ -369,7 +368,8 @@ function Navbar({ isAdmin, language, setLanguage, theme, toggleTheme, setShowLog
                     backgroundColor: "#ffc107",
                     color: "#212529",
                     border: "none",
-                    padding: "0.25rem 0.7rem",
+                    padding: "0.25rem 0.5rem",
+                    paddingTop: "8px",
                     borderRadius: "0.18rem",
                     textDecoration: "none",
                     fontSize: "0.78rem",
@@ -378,7 +378,8 @@ function Navbar({ isAdmin, language, setLanguage, theme, toggleTheme, setShowLog
                     textAlign: "center",
                     transition: "all 0.3s ease",
                     minHeight: "32px",
-                    height: "32px"
+                    height: "35px",
+                    
                   }}
                 >
                   Admin Panel
@@ -396,11 +397,13 @@ function Navbar({ isAdmin, language, setLanguage, theme, toggleTheme, setShowLog
                     backgroundColor: "#dc3545",
                     color: "#fff",
                     border: "none",
-                    padding: "0.5rem 1rem",
+                    padding: "0.42rem 0.7rem",
                     borderRadius: "0.25rem",
                     fontSize: "0.875rem",
                     fontWeight: "600",
-                    transition: "all 0.3s ease"
+                    transition: "all 0.3s ease",
+                    
+                    
                   }}
                 >
                   Logout
