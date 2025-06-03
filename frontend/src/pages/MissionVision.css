@@ -1,21 +1,155 @@
-.mission-vision-box {
-    /* background-color: #072f2a; Deep green background */
-    background: linear-gradient(rgba(32, 33, 33, 0.9), rgba(7, 47, 42, 0.9)),
-                url('E:\Developping\Own Project developing\CrosscrateExim\frontend\public\images\bg-about.jpeg') center/cover no-repeat;
-    border-radius: 20px;
-    color: white;
+.mvx-wrapper {
+  padding: 2rem 0;
+  background: linear-gradient(135deg, rgba(7, 47, 42, 0.95), rgba(32, 33, 33, 0.9));
+  border-radius: 20px;
+  margin: 5px;
+}
+
+.mvx-box {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+.mvx-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(7, 47, 42, 0.95), rgba(32, 33, 33, 0.9)),
+              url("../assets/bg-about.jpeg") center/cover no-repeat;
+  z-index: -1;
+}
+
+.mvx-content {
+  padding: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.mvx-section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.mvx-section-icon {
+  font-size: 2.5rem;
+  color: #fca311;
+  margin-right: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(252, 163, 17, 0.3);
+}
+
+.mvx-section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(90deg, #fca311, #ffd166);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+.mvx-mission-text p,
+.mvx-vision-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.mvx-divider {
+  display: flex;
+  align-items: center;
+  margin: 3rem 0;
+}
+
+.mvx-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(252, 163, 17, 0.5), transparent);
+}
+
+.mvx-divider-circle {
+  width: 12px;
+  height: 12px;
+  background-color: #fca311;
+  border-radius: 50%;
+  margin: 0 1rem;
+}
+
+.mvx-vision-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.mvx-vision-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.mvx-vision-item:hover {
+  transform: translateX(5px);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.mvx-vision-item-icon {
+  color: #fca311;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.mvx-vision-item-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.mvx-vision-conclusion {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-left: 3px solid #fca311;
+  background-color: rgba(252, 163, 17, 0.1);
+  border-radius: 0 8px 8px 0;
+}
+
+@media (max-width: 768px) {
+  .mvx-content {
+    padding: 2rem 1.5rem;
   }
   
-  .mission-vision-box strong {
-    color: #fca311; /* Highlighted orange */
+  .mvx-section-header {
+    flex-direction: column;
+    text-align: center;
   }
   
-  .mission-vision-box ul {
-    padding-left: 1.2rem;
+  .mvx-section-icon {
+    margin-right: 0;
     margin-bottom: 1rem;
   }
   
-  .mission-vision-box li {
-    margin-bottom: 0.5rem;
+  .mvx-section-title {
+    font-size: 1.8rem;
   }
-  
+}

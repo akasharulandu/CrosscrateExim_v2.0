@@ -1,0 +1,23 @@
+.nav-link-underline {
+  position: relative;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+.nav-link-underline::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #ffd600;
+  transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
+  border-radius: 2px;
+}
+
+.nav-link-underline:hover::after,
+.nav-link-underline.active::after {
+  width: 100%;
+} 

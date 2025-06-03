@@ -9,25 +9,33 @@ const ProductCard = ({ product, onClick, language }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="col-md-4 mb-3">
+    <div className="crosscrate-product-col col-md-4 mb-3">
       <div 
-  className="card h-100 hover-card shadow-sm" 
-  onClick={() => onClick(product)} 
-  style={{ cursor: 'pointer', border: '1px solid #dee2e6' }}
->
-
+        className="crosscrate-product-card hover-card shadow-sm" 
+        onClick={() => onClick(product)}
+      >
         {product.imageUrl && (
-  <div style={{ borderBottom: '2px solid #ccc' }}>
-    <img
-      src={product.imageUrl}
-      alt={product.name}
-      className="card-img-top"
-      style={{ height: '200px', objectFit: 'cover' }}
-    />
-  </div>
+          <div className="crosscrate-product-image-container">
+            <img
+              src={product.imageUrl}
+              alt={product.name?.en || product.name}
+              className="crosscrate-product-image"
+            />
+          </div>
         )}
-        <div className="card-body text-center">
-          <h5 className="card-title">{product.name}</h5>
+        <div className="crosscrate-product-body">
+          <h5 className="crosscrate-product-title">
+            {product.name?.en || product.name}
+          </h5>
+          <div className="crosscrate-product-price">
+            ₹{product.price}
+          </div>
+          <div className="crosscrate-product-description">
+            {product.description?.en || product.description}
+          </div>
+          <button className="crosscrate-product-view-btn">
+            View Details
+          </button>
         </div>
       </div>
     </div>
