@@ -601,10 +601,12 @@
 .delete-confirm-btn {
   background-color: var(--delete-color);
   border-color: var(--delete-color);
+  color: red;
 }
 
 .delete-cancel-btn {
   border-color: var(--input-border);
+  color: blue;
 }
 
 /* Custom Pagination */

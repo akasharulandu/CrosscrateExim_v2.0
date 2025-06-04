@@ -235,7 +235,7 @@ function Home({ isAdmin }) {
       className={`crosscrate-home-container ${theme} ${themeClass}`}
       style={{
         background:
-          theme === "light" ? "linear-gradient(135deg, #e3f9f7, #fddaed)" : "linear-gradient(135deg, #202423, #191c1b)",
+          theme === "light" ? "linear-gradient(135deg, #e3f9f7, #e3f9f7)" : "linear-gradient(135deg, #202423, #191c1b)",
         minHeight: "100vh",
         transition: "background 0.5s ease",
       }}
@@ -244,9 +244,15 @@ function Home({ isAdmin }) {
         <motion.div
           initial={{ x: 300, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          className="alert alert-success alert-dismissible fade show position-fixed end-0 m-3 crosscrate-home-slide-in-alert"
+          className="alert alert-info alert-dismissible fade show position-fixed end-0 m-3 crosscrate-home-slide-in-alert"
           role="alert"
-          style={{ zIndex: 9999, top: "70px" }}
+          style={{
+            zIndex: 9999,
+            top: "70px",
+            backgroundColor: "#2563eb", // blue-600
+            color: "#fff",
+            borderColor: "#2563eb"
+          }}
         >
           Logout Successful!
         </motion.div>
