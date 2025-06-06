@@ -36,6 +36,7 @@ const ProductTable = ({ products: propProducts, theme }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize] = useState(4)
   const [searchText, setSearchText] = useState("")
+  const [submitLoading, setSubmitLoading] = useState(false)
 
   // Use theme from props instead of local state
   const isDarkMode = theme === "dark"
@@ -180,6 +181,7 @@ const ProductTable = ({ products: propProducts, theme }) => {
 
   const handleFormSubmit = async () => {
     try {
+      setSubmitLoading(true)
       const values = await form.validateFields()
       console.log("Form values:", values)
 
@@ -215,10 +217,16 @@ const ProductTable = ({ products: propProducts, theme }) => {
 
       const formData = new FormData()
 
-      // Backend expects multilingual field names
+      // Use simple field names first, then add multilingual support
+      formData.append("name", values.name.trim())
+      formData.append("description", values.description.trim())
+      formData.append("price", Number.parseFloat(values.price).toString())
+
+      // Also append multilingual format for backward compatibility
       formData.append("name[en]", values.name.trim())
       formData.append("description[en]", values.description.trim())
-      formData.append("price", Number.parseFloat(values.price).toString())
+      formData.append("nameEn", values.name.trim())
+      formData.append("descriptionEn", values.description.trim())
 
       // Always append specs (empty array if none)
       formData.append("specs", JSON.stringify(finalSpecs))
@@ -226,6 +234,7 @@ const ProductTable = ({ products: propProducts, theme }) => {
       // Handle image upload
       if (fileList.length > 0 && fileList[0].originFileObj) {
         formData.append("photo", fileList[0].originFileObj)
+        // formData.append("image", fileList[0].originFileObj) // Add alternative field name
       }
 
       // Debug: Log FormData contents
@@ -255,7 +264,17 @@ const ProductTable = ({ products: propProducts, theme }) => {
         message.success("Product updated successfully")
       } else {
         console.log("Creating new product with endpoint: /api/products/upload")
-        response = await axios.post("/api/products/upload", formData, config)
+        // Try both endpoints if needed
+        try {
+          response = await axios.post("/api/products/upload", formData, config)
+        } catch (error) {
+          if (error.response && error.response.status === 404) {
+            console.log("Trying alternative endpoint: /api/products")
+            response = await axios.post("/api/products", formData, config)
+          } else {
+            throw error
+          }
+        }
         message.success("Product added successfully")
       }
 
@@ -301,6 +320,8 @@ const ProductTable = ({ products: propProducts, theme }) => {
         console.error("Unexpected error:", error.message)
         message.error(`Unexpected error: ${error.message}`)
       }
+    } finally {
+      setSubmitLoading(false)
     }
   }
 
@@ -455,6 +476,7 @@ const ProductTable = ({ products: propProducts, theme }) => {
         cancelText="Cancel"
         onCancel={() => setModalOpen(false)}
         onOk={handleFormSubmit}
+        confirmLoading={submitLoading}
         destroyOnClose
         width={1000}
         className={isDarkMode ? "ptable-dark-modal" : "ptable-light-modal"}

@@ -318,7 +318,7 @@
 
 .delete-button:hover {
   background-color: var(--delete-color);
-  color: white;
+  color: rgb(249, 48, 58);
   transform: translateY(-2px);
 }
 
@@ -601,10 +601,12 @@
 .delete-confirm-btn {
   background-color: var(--delete-color);
   border-color: var(--delete-color);
+  color: red;
 }
 
 .delete-cancel-btn {
   border-color: var(--input-border);
+  color: blue;
 }
 
 /* Custom Pagination */
