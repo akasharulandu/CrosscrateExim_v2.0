@@ -415,6 +415,7 @@ const ProductTable = ({ products: propProducts, theme }) => {
       <div className="ptable-header">
         <div className="ptable-header-left">
           <h2 className="ptable-title">Product Management</h2>
+          
           <div className="ptable-search-container">
             <Input
               placeholder="Search products..."

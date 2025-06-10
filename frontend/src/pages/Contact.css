@@ -193,9 +193,9 @@
 }
 
 .alert-success {
-  background-color: rgba(213, 192, 5, 0.2);
-  border: 1px solid rgba(227, 242, 19, 0.3);
-  color: #f7f1f3;
+  background-color: #e6ffe6; /* much lighter green background for better contrast */
+  border: 1px solid #4caf50;  /* solid green border */
+  color: #17632a; /* deeper green text for visibility */
 }
 
 .alert-danger {
