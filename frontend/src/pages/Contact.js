@@ -118,6 +118,12 @@ function Contact() {
                   {successMessage}
                 </motion.div>
               )}
+              {successMessage && (() => {
+                setTimeout(() => {
+                  if (typeof setSuccessMessage === "function") setSuccessMessage("");
+                }, 900);
+                return null;
+              })()}
               
               {errorMessage && (
                 <motion.div 
@@ -128,7 +134,13 @@ function Contact() {
                   {errorMessage}
                 </motion.div>
               )}
-
+              { errorMessage && (() => {
+                setTimeout(() => {
+                  if (typeof setErrorMessage === "function") setErrorMessage("");
+                }, 900);
+                return null;
+              })()}
+              
               <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-group">
                   <input
