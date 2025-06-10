@@ -1,10 +1,25 @@
 {
+  "name": "crosscrate-exim",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "build-frontend": "cd frontend && npm run build",
+    "start-backend": "cd backend && npm start",
+    "start": "npm run install-backend && npm run install-frontend && npm run build-frontend && npm run start-backend",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\""
+  },
   "dependencies": {
     "bootstrap": "^5.3.6",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
     "react-bootstrap": "^2.10.10",
     "react-icons": "^5.5.0",
-    "react-swipeable": "^7.0.2"
+    "react-swipeable": "^7.0.2",
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
