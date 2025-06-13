@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install-client": "cd client && npm install",
-    "install-server": "cd server && npm install",
-    "build-client": "cd client && npm run build",
-    "start-server": "cd server && npm start",
-    "start": "npm run install-server && npm run install-client && npm run build-client && npm run start-server"
-  },
+  "install-client": "cd client && npm install",
+  "install-server": "cd server && npm install",
+  "install": "npm run install-client && npm run install-server",
+  "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\""
+},
 
   "dependencies": {
     "bootstrap": "^5.3.6",
